@@ -1,9 +1,12 @@
 package sample;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class World {
     private int mapWidth;
     private int mapHeight;
-    private Level levels;
+    private List<Level> levels;
     private Player player;
     private Enemy enemy;
     private int currentLevel;
@@ -11,6 +14,10 @@ public class World {
     private int spawnTimer;
 
     public World() {
+        levels = new ArrayList<Level>();
+        currentLevel = 0;
+        spawnedEnemies = 0;
+        spawnTimer = 0;
     }
 
     public int getMapWidth() {
@@ -29,11 +36,11 @@ public class World {
         this.mapHeight = mapHeight;
     }
 
-    public Level getLevels() {
+    public List<Level> getLevels() {
         return levels;
     }
 
-    public void setLevels(Level levels) {
+    public void setLevels(List<Level> levels) {
         this.levels = levels;
     }
 

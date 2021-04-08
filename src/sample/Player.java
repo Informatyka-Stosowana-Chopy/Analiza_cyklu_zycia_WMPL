@@ -1,6 +1,6 @@
 package sample;
 
-public class Player {
+public class Player extends Unit{
     private int score;
 
     public Player() {
@@ -12,5 +12,11 @@ public class Player {
 
     public void setScore(int score) {
         this.score = score;
+    }
+
+    boolean isAlive()
+    {
+        return true;
+        //TODO
     }
 }
