@@ -1,22 +1,20 @@
 package sample;
 
-public class Player extends Unit{
-    private int score;
-
-    public Player() {
+public class Player extends Unit {
+    public enum Move {
+        INVALID,
+        LEFT,
+        RIGHT,
+        ATTACK
     }
 
-    public int getScore() {
-        return score;
+    ;
+
+    public Player(int health, Coordinates position) {
+        super(health, position);
     }
 
-    public void setScore(int score) {
-        this.score = score;
-    }
-
-    boolean isAlive()
-    {
-        return true;
-        //TODO
+    public char getSprite() {
+        return 'P';
     }
 }
