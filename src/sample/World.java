@@ -2,10 +2,7 @@ package sample;
 
 import javafx.print.Collation;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class World {
 
@@ -34,6 +31,7 @@ public class World {
     }
 
     private void spawnEnemies() {
+        Random random = new Random();
         if (isPlayerFighting()) {
             return;
         }
@@ -58,12 +56,12 @@ public class World {
             int bossHealth = levels.get(currentLevel).getBossHealth();
 
             if (bossHealth > 0) {
-                spawnEnemy(new Boss(bossHealth, new Coordinates(rand() % mapWidth, 0))); //TODO make correct rand
+                spawnEnemy(new Boss(bossHealth, new Coordinates(random.nextInt(mapWidth), 0))); //TODO make correct rand
                 return;
             }
         }
 
-        spawnEnemy(new Zombie(0, new Coordinates(rand() % mapWidth, 0))); //TODO the same and check this '0'
+        spawnEnemy(new Zombie(0, new Coordinates(random.nextInt(mapWidth), 0))); //TODO the same and check this '0'
     }
 
     private void doEnemiesTurn() {
