@@ -1,5 +1,8 @@
 package sample;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Random;
 
 public class Enemy extends Unit {
@@ -11,7 +14,7 @@ public class Enemy extends Unit {
     public void decideNextAttack() {
         Random random = new Random();
         int a = random.nextInt(2);
-        //TODO check if random has range <0;2>
+        //TODO check if random has range <0;2> /// to powinno dzialac
         switch (a) {
             case 0:
                 setNextAttack(Attack.SCISSORS);
