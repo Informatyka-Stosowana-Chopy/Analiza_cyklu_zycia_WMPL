@@ -11,15 +11,13 @@ public class World {
         WIN,
         LOSE,
         INVALID
-    }
-
-    ;
+    };
 
     private int mapWidth;
     private int mapHeight;
     private List<Level> levels;
     private Player player;
-    private List<Enemy> enemies;
+    public List<Enemy> enemies;
     private int currentLevel;
     private int spawnedEnemies;
     private int spawnTimer;
@@ -27,7 +25,9 @@ public class World {
 
 
     private void removeDeadEnemies() {
-        //enemies.removeIf(); //TODO
+        for(int i = 0; i < enemies.size(); i++) {
+            if(enemies.get(i).getHealth() <= 0) enemies.remove(i);
+        }
     }
 
     private void spawnEnemies() {
@@ -56,12 +56,12 @@ public class World {
             int bossHealth = levels.get(currentLevel).getBossHealth();
 
             if (bossHealth > 0) {
-                spawnEnemy(new Boss(bossHealth, new Coordinates(random.nextInt(mapWidth), 0))); //TODO make correct rand
+                spawnEnemy(new Boss(bossHealth, new Coordinates(random.nextInt(mapWidth), 0)));
                 return;
             }
         }
 
-        spawnEnemy(new Zombie(0, new Coordinates(random.nextInt(mapWidth), 0))); //TODO the same and check this '0'
+        spawnEnemy(new Zombie(0, new Coordinates(random.nextInt(mapWidth), 0)));
     }
 
     private void doEnemiesTurn() {
@@ -190,12 +190,12 @@ public class World {
             return null;
         }
 
-//        std::sort(enemiesInLine.begin(), enemiesInLine.end(),
-//              [](const std::shared_ptr<Enemy> &first, const std::shared_ptr<Enemy> &second) {
-//        return first->getPosition().getY() > second->getPosition().getY();
-//    }); TODO
+        Enemy frontEnemy = enemiesInLine.get(0);
+        for(int i = 1; i < enemiesInLine.size(); i++) {
+            if(enemiesInLine.get(i).getPosition().getY() > frontEnemy.getPosition().getY()) frontEnemy = enemiesInLine.get(i);
+        }
 
-        return enemiesInLine.get(0);
+        return frontEnemy;
     }
 
     public FightResult getFightResult(Unit.Attack playerAttack, Unit.Attack enemyAttack) {
@@ -241,7 +241,11 @@ public class World {
     }
 
     public void removeEnemy(Enemy enemy) {
-        //TODO all function
+
+        for(int i = 0; i < enemies.size(); i++) {
+            if(enemies.get(i) == enemy || enemies.get(i) == getFoughtEnemy()) enemies.remove(i);
+        }
+        //TODO all function // chyba zrobione xd
 
 //        if(it == enemies.end()) {
 //            return;

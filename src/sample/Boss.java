@@ -8,4 +8,5 @@ public class Boss extends Enemy {
     public char getSprite() {
         return (char) health;
     }
+
 }
