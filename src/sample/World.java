@@ -11,7 +11,9 @@ public class World {
         WIN,
         LOSE,
         INVALID
-    };
+    }
+
+    ;
 
     private int mapWidth;
     private int mapHeight;
@@ -25,8 +27,8 @@ public class World {
 
 
     private void removeDeadEnemies() {
-        for(int i = 0; i < enemies.size(); i++) {
-            if(enemies.get(i).getHealth() <= 0) enemies.remove(i);
+        for (int i = 0; i < enemies.size(); i++) {
+            if (enemies.get(i).getHealth() <= 0) enemies.remove(i);
         }
 
     }
@@ -62,7 +64,7 @@ public class World {
             }
         }
 
-        spawnEnemy(new Zombie(0, new Coordinates(random.nextInt(mapWidth), 0)));
+        spawnEnemy(new Zombie(1, new Coordinates(random.nextInt(mapWidth), 0)));
     }
 
     private void doEnemiesTurn() {
@@ -192,8 +194,9 @@ public class World {
         }
 
         Enemy frontEnemy = enemiesInLine.get(0);
-        for(int i = 1; i < enemiesInLine.size(); i++) {
-            if(enemiesInLine.get(i).getPosition().getY() > frontEnemy.getPosition().getY()) frontEnemy = enemiesInLine.get(i);
+        for (int i = 1; i < enemiesInLine.size(); i++) {
+            if (enemiesInLine.get(i).getPosition().getY() > frontEnemy.getPosition().getY())
+                frontEnemy = enemiesInLine.get(i);
         }
 
         return frontEnemy;
@@ -243,8 +246,8 @@ public class World {
 
     public void removeEnemy(Enemy enemy) {
 
-        for(int i = 0; i < enemies.size(); i++) {
-            if(enemies.get(i) == enemy || enemies.get(i) == getFoughtEnemy()) enemies.remove(i);
+        for (int i = 0; i < enemies.size(); i++) {
+            if (enemies.get(i) == enemy || enemy == getFoughtEnemy()) enemies.remove(i);
         }
         //TODO all function // chyba zrobione xd
 
