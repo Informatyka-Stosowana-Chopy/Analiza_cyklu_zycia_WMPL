@@ -1,4 +1,4 @@
-package sample;
+package game;
 
 public class Zombie extends Enemy {
     public Zombie(int health, Coordinates position) {

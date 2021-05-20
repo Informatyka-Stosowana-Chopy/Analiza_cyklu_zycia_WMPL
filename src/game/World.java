@@ -1,6 +1,4 @@
-package sample;
-
-import javafx.print.Collation;
+package game;
 
 import java.util.*;
 
