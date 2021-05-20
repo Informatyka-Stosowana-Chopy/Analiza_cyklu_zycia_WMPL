@@ -28,6 +28,7 @@ public class World {
         for(int i = 0; i < enemies.size(); i++) {
             if(enemies.get(i).getHealth() <= 0) enemies.remove(i);
         }
+
     }
 
     private void spawnEnemies() {
@@ -96,7 +97,7 @@ public class World {
         this.foughtEnemy = null;
         this.mapHeight = mapHeight;
         this.mapWidth = mapWidth;
-        this.player = new Player(10, new Coordinates(this.mapWidth / 2, this.mapHeight - 1)); //TODO
+        this.player = new Player(10, new Coordinates(this.mapWidth / 2, this.mapHeight - 1));
     }
 
     public void addLevel(Level level) {

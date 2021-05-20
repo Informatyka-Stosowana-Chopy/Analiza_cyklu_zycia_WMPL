@@ -1,20 +1,22 @@
 package sample;
+import java.util.Scanner;
 
 public class Game {
     private World world;
 
-    private char getUserInput()
-    {
-        //TODO wczytanie (zależy czy z klawiatury czy gui)
+    private char getUserInput() {
         String userInput = null;
-        if(userInput == null) {
+        Scanner scan = new Scanner(System.in);
+        userInput = scan.nextLine();
+
+        if (userInput == null) {
             return 0;
         }
 
         return userInput.charAt(0);
     }
-    private Player.Move getPlayerMove(char input)
-    {
+
+    private Player.Move getPlayerMove(char input) {
         switch (input) {
             case 'a': {
                 return Player.Move.LEFT;
@@ -25,13 +27,13 @@ public class Game {
             case 'w': {
                 return Player.Move.ATTACK;
             }
-            default : {
+            default: {
                 return Player.Move.INVALID;
             }
         }
     }
-    private Unit.Attack getPlayerAttack(char input)
-    {
+
+    private Unit.Attack getPlayerAttack(char input) {
         switch (input) {
             case '1': {
                 return Unit.Attack.PAPER;
@@ -42,20 +44,18 @@ public class Game {
             case '3': {
                 return Unit.Attack.SCISSORS;
             }
-            default : {
+            default: {
                 return Unit.Attack.INVALID;
             }
         }
     }
 
-    private void doPlayerTurn()
-    {
+    private void doPlayerTurn() {
         if (world.isPlayerFighting()) {
             Unit.Attack attack = Unit.Attack.INVALID;
 
             while (attack == Unit.Attack.INVALID) {
-                //std::cout << "Wybierz atak (1 - GLOCK, 2 - AK-47, 3 - AWP): ";
-                //TODO
+                System.out.println("Wybierz atak (1 - GLOCK, 2 - AK-47, 3 - AWP): ");
                 attack = getPlayerAttack(getUserInput());
             }
 
@@ -69,7 +69,6 @@ public class Game {
             switch (result) {
                 case DRAW:
                     System.out.println("Remis\n");
-                    //TODO
                     break;
                 case WIN:
                     System.out.println("Wygrana\n");
@@ -90,8 +89,7 @@ public class Game {
         }
     }
 
-    public Game(int mapWidth, int mapHeight)
-    {
+    public Game(int mapWidth, int mapHeight) {
         world = new World(mapWidth, mapHeight);
 
         world.addLevel(new Level(5, 3, 0));
@@ -100,37 +98,34 @@ public class Game {
         world.addLevel(new Level(15, 2, 5));
     }
 
-    public boolean isOver()
-    {
+    public boolean isOver() {
         return
                 world.getPlayer().getHealth() <= 0 ||
-            world.getLevelCount() == world.getCurrentLevel();
+                        world.getLevelCount() == world.getCurrentLevel();
     }
 
-    public void restart()
-    {
+    public void restart() {
         world.reset();
     }
-    public void step()
-    {
+
+    public void step() {
         doPlayerTurn();
         world.step();
-        if(world.isLevelComplete()) {
+        if (world.isLevelComplete()) {
             onLevelComplete();
         }
     }
 
-    public String getGameDisplay()
-    {
+    public String getGameDisplay() {
         return world.getWorldDisplay();
     }
-    public void onLevelComplete()
-    {
+
+    public void onLevelComplete() {
         int currentLevel = world.getCurrentLevel();
         world.setCurrentLevel(currentLevel + 1);
         System.out.println("Poziom " + currentLevel + " pokonany!\n");
 
-        if(currentLevel != world.getLevelCount()) {
+        if (currentLevel != world.getLevelCount()) {
             System.out.println("Wprowadz nazwe pliku do zapisu albo zostaw puste, jesli nie chcesz zapisywac: ");
 
             String path = null;
@@ -143,15 +138,13 @@ public class Game {
                     System.out.println(e);
                 }
             }
-        }
-        else {
+        } else {
             System.out.println("Gratulacje! Ukonczyles gre.\n");
             return;
         }
     }
 
-    public void save(String path)
-    {
+    public void save(String path) {
         //std::ofstream ofs(path, std::ios::out | std::ios::trunc | std::ios::binary);
         //TODO
 //        if (!ofs.is_open()) {
@@ -159,15 +152,15 @@ public class Game {
 //        }
 
         int playerHp = world.getPlayer().getHealth(),
-            playerX = world.getPlayer().getPosition().getX(),
-            currentLevel = world.getCurrentLevel();
+                playerX = world.getPlayer().getPosition().getX(),
+                currentLevel = world.getCurrentLevel();
 
 //        ofs.write((char*)&currentLevel, sizeof(currentLevel));
 //        ofs.write((char*)&playerHp, sizeof(playerHp));
 //        ofs.write((char*)&playerX, sizeof(playerX));
     }
-    public void load(String path)
-    {
+
+    public void load(String path) {
         //std::ifstream ifs(path, std::ios::in | std::ios::binary);
 //TODO
 
