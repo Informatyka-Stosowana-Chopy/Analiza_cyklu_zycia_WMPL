@@ -28,6 +28,7 @@ public class World {
 
     private void removeDeadEnemies() {
         //enemies.removeIf(); //TODO
+
     }
 
     private void spawnEnemies() {
@@ -56,12 +57,12 @@ public class World {
             int bossHealth = levels.get(currentLevel).getBossHealth();
 
             if (bossHealth > 0) {
-                spawnEnemy(new Boss(bossHealth, new Coordinates(random.nextInt(mapWidth), 0))); //TODO make correct rand
+                spawnEnemy(new Boss(bossHealth, new Coordinates(random.nextInt(mapWidth), 0)));
                 return;
             }
         }
 
-        spawnEnemy(new Zombie(0, new Coordinates(random.nextInt(mapWidth), 0))); //TODO the same and check this '0'
+        spawnEnemy(new Zombie(0, new Coordinates(random.nextInt(mapWidth), 0)));
     }
 
     private void doEnemiesTurn() {
@@ -96,7 +97,7 @@ public class World {
         this.foughtEnemy = null;
         this.mapHeight = mapHeight;
         this.mapWidth = mapWidth;
-        this.player = new Player(10, new Coordinates(this.mapWidth / 2, this.mapHeight - 1)); //TODO
+        this.player = new Player(10, new Coordinates(this.mapWidth / 2, this.mapHeight - 1));
     }
 
     public void addLevel(Level level) {
